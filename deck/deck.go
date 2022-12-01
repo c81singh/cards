@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"math/rand"
 	"strings"
+	"time"
 )
 
 type Deck []string
@@ -67,10 +69,20 @@ func (d Deck) ToString3() []byte {
 	return byty
 }
 
+func (d Deck) Shuffle() Deck {
+	rand.Seed(time.Now().UnixMicro())
+	for i, _ := range d {
+		rn := rand.Intn(len(d))
+		d[i], d[rn] = d[rn], d[i]
+	}
+	return d
+}
+
 func NewDeck() Deck {
 	var deck []string = []string{}
 	suits := []string{"Diamonds", "Cubs", "Hearts", "Spades"}
-	cValues := []string{"Ace",
+	cValues := []string{
+		"Ace",
 		"King",
 		"Queen",
 		"Jack",
