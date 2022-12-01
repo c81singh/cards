@@ -72,7 +72,7 @@ func (d Deck) ToString3() []byte {
 func (d Deck) Shuffle() Deck {
 	rand.Seed(time.Now().UnixMicro())
 	for i, _ := range d {
-		rn := rand.Intn(len(d))
+		rn := rand.Intn(len(d) - 1)
 		d[i], d[rn] = d[rn], d[i]
 	}
 	return d
